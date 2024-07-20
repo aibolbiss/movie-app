@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  background-color: #e0f8ff;
+}
+.movie-img {
+  width: 150px;
+}
+.movie-img-big {
+  width: 200px;
+}

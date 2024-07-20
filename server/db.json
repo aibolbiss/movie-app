@@ -1,0 +1,40 @@
+{
+  "movies": [
+    {
+      "id": "1",
+      "name": "Дэдпул и Россомаха",
+      "year": 2024,
+      "genre": "Боевик",
+      "rating": 10,
+      "description": "Росомаха восстанавливается после травм, когда его путь пересекается с крикливым Дэдпулом. Они объединяются, чтобы победить общего врага.",
+      "photo": "https://m.media-amazon.com/images/M/MV5BMzNjM2E1NWUtNWUzNS00YmI5LTg1NjUtMmU0NmNiNTlhM2NmXkEyXkFqcGc@._V1_FMjpg_UX1276_.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Человек-паук: Нет пути домой",
+      "year": 2021,
+      "genre": "Фантастика",
+      "rating": 8,
+      "description": "Теперь, когда личность Человека-паука раскрыта, Питер просит Доктора Стрэнджа о помощи. Когда заклинание идет не так, начинают появляться опасные враги из других миров, заставляя Питера понять, что на самом деле значит быть Человеком-пауком.",
+      "photo": "https://m.media-amazon.com/images/M/MV5BMGE2ODE0NTMtMTlkNS00MWVlLTg2MjctMjIwYjQwZDRjNzYwXkEyXkFqcGdeQXVyMjAzODkzMTk@._V1_FMjpg_UY2250_.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Мстители: Финал",
+      "year": 2019,
+      "genre": "Фантастика",
+      "rating": 9,
+      "description": "После разрушительных событий Мстители: Война бесконечности (2018) Вселенная лежит в руинах. С помощью оставшихся союзников Мстители снова собираются, чтобы обратить вспять действия Таноса и восстановить баланс во вселенной.",
+      "photo": "https://m.media-amazon.com/images/M/MV5BNDM3NjYxNjQtYjJlNy00N2M4LThhZDMtNjhhZTA0NmFhODdjXkEyXkFqcGdeQXVyNzYwNTMyMTA@._V1_FMjpg_UX864_.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Тор: Любовь и гром",
+      "year": 2022,
+      "genre": "Фантастика",
+      "rating": 6,
+      "description": "Тор заручается поддержкой Валькирии, Корга и бывшей девушки Джейн Фостер, чтобы сразиться с Горром-мясником богов, который намеревается уничтожить богов.",
+      "photo": "https://m.media-amazon.com/images/M/MV5BOWYxNjIyNjUtNTVkMS00ZDI2LTkwNmEtYzI2OWU5YTQyNGVmXkEyXkFqcGdeQXVyNDM1ODc2NzE@._V1_FMjpg_UX680_.jpg"
+    }
+  ]
+}
