@@ -15,24 +15,50 @@
           <p>Супер приложение для добавления фильмов</p>
           <form @submit.prevent="searchMovies">
             <div class="row">
-              <div class="col-md-6">
-                <div class="row">
-                  <div class="col">
-                    <input
-                      v-model="searchTerm"
-                      type="text"
-                      class="form-control"
-                      placeholder="Поиск по имени"
-                    />
-                  </div>
-                  <div class="col">
-                    <input
-                      type="submit"
-                      class="btn btn-outline-dark"
-                      value="Поиск"
-                    />
-                  </div>
-                </div>
+              <div class="col-md-4">
+                <input
+                  v-model="searchTerm"
+                  type="text"
+                  class="form-control"
+                  placeholder="Поиск по имени или описанию"
+                />
+              </div>
+              <div class="col-md-2">
+                <input
+                  v-model.number="yearFilter"
+                  type="number"
+                  min="1"
+                  max="2024"
+                  class="form-control"
+                  placeholder="Год выпуска"
+                  @input="updateYearFilter"
+                />
+              </div>
+              <div class="col-md-2">
+                <input
+                  v-model.number="ratingFilter"
+                  type="number"
+                  min="1"
+                  max="10"
+                  class="form-control"
+                  placeholder="Рейтинг"
+                  @input="updateRatingFilter"
+                />
+              </div>
+              <div class="col-md-2">
+                <select
+                  v-model="genreFilter"
+                  class="form-select"
+                >
+                  <option value="">Все жанры</option>
+                  <option
+                    v-for="genre in genres"
+                    :key="genre"
+                    :value="genre"
+                  >
+                    {{ genre }}
+                  </option>
+                </select>
               </div>
             </div>
           </form>
@@ -71,7 +97,7 @@
       <div class="row">
         <div
           class="col-md-6"
-          v-for="movie in [...movies].reverse()"
+          v-for="movie in [...filteredMovies].reverse()"
           :key="movie.id"
         >
           <div class="card my-2 list-group-item-info shadow-lg">
@@ -184,8 +210,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, ref, onMounted, computed } from 'vue';
 import { MovieService } from '../services/MovieService';
+import { validateNumber } from '../utils/validation';
 import Spinner from '../components/Spinner.vue';
 
 interface Movie {
@@ -205,6 +232,10 @@ export default defineComponent({
     const errorMessage = ref<string | null>(null);
     const movies = ref<Movie[]>([]);
     const searchTerm = ref<string>('');
+    const yearFilter = ref<number | null>(null);
+    const ratingFilter = ref<number | null>(null);
+    const genreFilter = ref<string>('');
+    const genres = ref<string[]>([]);
     const selectedMovie = ref<Movie | null>(null);
 
     const fetchMovies = async () => {
@@ -212,6 +243,9 @@ export default defineComponent({
         loading.value = true;
         const response = await MovieService.getAllMovies();
         movies.value = response;
+        genres.value = Array.from(
+          new Set(response.map((movie) => movie.genre))
+        );
       } catch (error) {
         errorMessage.value =
           error instanceof Error ? error.message : 'Unknown error';
@@ -247,19 +281,54 @@ export default defineComponent({
       }
     };
 
-    // const searchMovies = async () => {
-    //   console.log('Searching for movies with term:', searchTerm.value);
-    // };
+    const updateYearFilter = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      const value = target.value === '' ? null : Number(target.value);
+      yearFilter.value = validateNumber(value, 2024);
+    };
+
+    const updateRatingFilter = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      const value = target.value === '' ? null : Number(target.value);
+      ratingFilter.value = validateNumber(value, 10);
+    };
+
+    const filteredMovies = computed(() => {
+      return movies.value.filter((movie) => {
+        const yearMatches =
+          yearFilter.value === null || movie.year === yearFilter.value;
+        const ratingMatches =
+          ratingFilter.value === null || movie.rating === ratingFilter.value;
+
+        return (
+          (searchTerm.value === '' ||
+            movie.name.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+            movie.description
+              .toLowerCase()
+              .includes(searchTerm.value.toLowerCase())) &&
+          yearMatches &&
+          ratingMatches &&
+          (genreFilter.value === '' || movie.genre === genreFilter.value)
+        );
+      });
+    });
 
     onMounted(fetchMovies);
 
     return {
       loading,
       movies,
+      genres,
       errorMessage,
       searchTerm,
+      yearFilter,
+      ratingFilter,
+      genreFilter,
+      filteredMovies,
       openDeleteModal,
       clickDeleteMovie,
+      updateYearFilter,
+      updateRatingFilter,
       selectedMovie,
     };
   },

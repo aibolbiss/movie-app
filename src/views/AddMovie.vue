@@ -123,8 +123,10 @@ export default defineComponent({
 
     const router = useRouter();
 
-    const validateYear = () => validateNumber(movie, 'year', 2024);
-    const validateRating = () => validateNumber(movie, 'rating', 10);
+    const validateYear = () =>
+      (movie.value.year = validateNumber(movie.value.year, 2024));
+    const validateRating = () =>
+      (movie.value.rating = validateNumber(movie.value.rating, 10));
 
     const submitCreate = async () => {
       try {
