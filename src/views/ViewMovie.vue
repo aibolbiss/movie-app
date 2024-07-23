@@ -83,7 +83,15 @@ import { defineComponent, ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { MovieService } from '../services/MovieService';
 import Spinner from '../components/Spinner.vue';
-import { Movie } from '../interfaces/types';
+
+interface Movie {
+  name: string;
+  year: number | null;
+  genre: string;
+  rating: number | null;
+  description: string;
+  photo: string;
+}
 
 export default defineComponent({
   components: {
