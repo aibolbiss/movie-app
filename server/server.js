@@ -7,7 +7,7 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser);
 server.use(router);
 
-const port = process.env.PORT || 8080; // Использование переменной окружения
+const port = process.env.PORT || 8080;
 server.listen(port, () => {
   console.log(`JSON Server is running on port ${port}`);
 });
