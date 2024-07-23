@@ -38,14 +38,14 @@
       v-if="!loading && isDone"
     >
       <div class="row align-items-center">
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-12 text-center mb-3">
           <img
             :src="movie.photo"
             alt="User Icon"
-            class="movie-img-big"
+            class="movie-img-big img-fluid"
           />
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-12">
           <ul class="list-group">
             <li class="list-group-item">
               Название: <span class="fw-bold">{{ movie.name }}</span>
@@ -65,7 +65,7 @@
           </ul>
         </div>
       </div>
-      <div class="row mt-5">
+      <div class="row mt-3 mb-3">
         <div class="col">
           <router-link
             to="/"
@@ -83,16 +83,7 @@ import { defineComponent, ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { MovieService } from '../services/MovieService';
 import Spinner from '../components/Spinner.vue';
-
-interface Movie {
-  id: string;
-  name: string;
-  year: number;
-  genre: string;
-  rating: number;
-  description: string;
-  photo: string;
-}
+import { Movie } from '../interfaces/types';
 
 export default defineComponent({
   components: {

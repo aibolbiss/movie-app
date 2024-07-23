@@ -14,8 +14,8 @@
           </p>
           <p>Супер приложение для добавления фильмов</p>
           <form @submit.prevent="searchMovies">
-            <div class="row">
-              <div class="col-md-4">
+            <div class="row g-2">
+              <div class="col-md-4 col-sm-6">
                 <input
                   v-model="searchTerm"
                   type="text"
@@ -23,7 +23,7 @@
                   placeholder="Поиск по имени или описанию"
                 />
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 col-sm-3">
                 <input
                   v-model.number="yearFilter"
                   type="number"
@@ -34,7 +34,7 @@
                   @input="updateYearFilter"
                 />
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 col-sm-3">
                 <input
                   v-model.number="ratingFilter"
                   type="number"
@@ -45,7 +45,7 @@
                   @input="updateRatingFilter"
                 />
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 col-sm-12">
                 <select
                   v-model="genreFilter"
                   class="form-select"
@@ -96,21 +96,21 @@
     >
       <div class="row">
         <div
-          class="col-md-6"
+          class="col-md-6 col-sm-12"
           v-for="movie in [...filteredMovies].reverse()"
           :key="movie.id"
         >
           <div class="card my-2 list-group-item-info shadow-lg">
             <div class="card-body">
               <div class="row align-items-center">
-                <div class="col-sm-4">
+                <div class="col-sm-4 col-12 text-center">
                   <img
                     :src="movie.photo"
                     alt="User Icon"
-                    class="movie-img"
+                    class="movie-img img-fluid"
                   />
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-7 col-12">
                   <ul class="list-group">
                     <li class="list-group-item">
                       Название:
@@ -135,7 +135,7 @@
                   </ul>
                 </div>
                 <div
-                  class="col-sm-1 d-flex flex-column justify-content-center align-items-center"
+                  class="col-sm-1 col-12 d-flex flex-column justify-content-center align-items-center mt-2 mt-sm-0 three-btn"
                 >
                   <router-link
                     :to="`/movies/view/${movie.id}`"
@@ -345,5 +345,17 @@ export default defineComponent({
   overflow: hidden; /* Прячет текст, выходящий за пределы контейнера */
   text-overflow: ellipsis; /* Заменяет обрезанный текст многоточием */
   width: 100%;
+}
+@media (max-width: 575px) {
+  .btn-info {
+    margin-top: 20px;
+  }
+  .movie-img {
+    margin-bottom: 20px;
+  }
+  .three-btn {
+    justify-content: space-evenly !important;
+    flex-direction: row !important;
+  }
 }
 </style>

@@ -10,7 +10,7 @@
     </div>
     <div class="container mt-3">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-lg-6 col-md-8 col-sm-12">
           <form @submit.prevent="updateSubmit">
             <div class="mb-2">
               <input
@@ -76,17 +76,19 @@
             <div class="mb-2">
               <input
                 type="submit"
-                class="btn btn-info text-white"
+                class="btn btn-info text-white w-100"
                 value="Обновить"
               />
             </div>
           </form>
         </div>
-        <div class="col-md-4">
+        <div
+          class="col-lg-6 col-md-4 col-sm-12 d-flex justify-content-center align-items-center"
+        >
           <img
             :src="movie.photo"
             alt="User Icon"
-            class="movie-img"
+            class="movie-img img-fluid"
           />
         </div>
       </div>
@@ -189,5 +191,10 @@ export default defineComponent({
   overflow: hidden;
   min-height: 50px; /* Минимальная высота для textarea */
   resize: none; /* Запретить изменение размера пользователем */
+}
+@media (max-width: 767.98px) {
+  .movie-img {
+    display: none;
+  }
 }
 </style>
